@@ -1,5 +1,6 @@
 package com.abc.healthcenter.model;
 
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -30,6 +31,7 @@ public class Payment {
 
 	@NotNull (message="please provide payment amount")
 	private int billId;
+	
 
 	public int getPaymentId() {
 		return paymentId;
@@ -78,8 +80,5 @@ public class Payment {
 	public void setBillId(int billId) {
 		this.billId = billId;
 	}
-	
-
-	
-	
 }
+	

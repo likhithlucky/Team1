@@ -41,69 +41,65 @@ public class PaymentEntity {
 	@OneToOne
 	@JoinColumn(name = "bill_id")
 	private BillEntity bill;
-	
-	/**
-	 * Getter method for Payment ID
-	 * @return
-	 */
+
+
 	public int getPaymentId() {
 		return paymentId;
 	}
-	
-	/**
-	 * Getter method for Payment ID
-	 * @param paymentId
-	 */
+
+
 	public void setPaymentId(int paymentId) {
 		this.paymentId = paymentId;
 	}
-	
-	/**
-	 * Getter method for Payment Date
-	 * @return
-	 */
+
+
 	public Date getPaymentDate() {
 		return paymentDate;
 	}
-	
-	/**
-	 * Setter method for Payment Date
-	 * @param paymentDate
-	 */
+
+
 	public void setPaymentDate(Date paymentDate) {
 		this.paymentDate = paymentDate;
 	}
-	
-	/**
-	 * Getter method for Payment Method
-	 * @return
-	 */
+
+
 	public String getPaymentMethod() {
 		return paymentMethod;
 	}
-	
-	/**
-	 * Setter method for Payment Method
-	 * @param paymentMethod
-	 */
+
+
 	public void setPaymentMethod(String paymentMethod) {
 		this.paymentMethod = paymentMethod;
 	}
-	
-	/**
-	 * Getter method for Payment amount
-	 * @return
-	 */
+
+
 	public double getPaymentAmount() {
 		return paymentAmount;
 	}
-	
-	/**
-	 * Setter method for Payment amount
-	 * @param paymentAmount
-	 */
+
+
 	public void setPaymentAmount(double paymentAmount) {
 		this.paymentAmount = paymentAmount;
+	}
+
+
+	public PatientEntity getPatient() {
+		return patient;
+	}
+
+
+	public void setPatient(PatientEntity patient) {
+		this.patient = patient;
+	}
+
+
+	public BillEntity getBill() {
+		return bill;
+	}
+
+
+	public void setBill(BillEntity bill) {
+		this.bill = bill;
 	}
 	
 

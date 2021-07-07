@@ -1,3 +1,4 @@
+
 package com.abc.healthcenter.model;
 
 public class ErrorResponse {
