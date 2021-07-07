@@ -1,19 +1,37 @@
 package com.abc.healthcenter.model;
 
-import java.time.LocalDate;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+
+
+/**
+ * 
+ * @author Pavan
+ *
+ * Date : 06-Jul-2021
+ */
 public class Payment {
 	private int paymentId;
 	
-	private LocalDate paymentDate;
 	
+	@NotEmpty (message="please provide payment date")
+	private String paymentDate;
+	
+	
+	@NotEmpty (message="please provide payment method")
 	private String paymentMethod;
 	
+	@NotNull (message="please provide payment amount")
 	private double paymentAmount;
 	
-	private Patient patient;
+	@NotNull (message="please provide payment amount")
+	private int patientId;
+
+	@NotNull (message="please provide payment amount")
+	private int billId;
 	
-	private Bill bill;
 
 	public int getPaymentId() {
 		return paymentId;
@@ -23,11 +41,11 @@ public class Payment {
 		this.paymentId = paymentId;
 	}
 
-	public LocalDate getPaymentDate() {
+	public String getPaymentDate() {
 		return paymentDate;
 	}
 
-	public void setPaymentDate(LocalDate paymentDate) {
+	public void setPaymentDate(String paymentDate) {
 		this.paymentDate = paymentDate;
 	}
 
@@ -47,21 +65,20 @@ public class Payment {
 		this.paymentAmount = paymentAmount;
 	}
 
-	public Patient getPatient() {
-		return patient;
+	public int getPatientId() {
+		return patientId;
 	}
 
-	public void setPatient(Patient patient) {
-		this.patient = patient;
+	public void setPatientId(int patientId) {
+		this.patientId = patientId;
 	}
 
-	public Bill getBill() {
-		return bill;
+	public int getBillId() {
+		return billId;
 	}
 
-	public void setBill(Bill bill) {
-		this.bill = bill;
+	public void setBillId(int billId) {
+		this.billId = billId;
 	}
-	
-	
 }
+	

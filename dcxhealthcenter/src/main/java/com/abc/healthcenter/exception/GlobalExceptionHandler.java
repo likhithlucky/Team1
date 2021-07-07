@@ -1,4 +1,3 @@
-
 package com.abc.healthcenter.exception;
 
 import java.util.Date;
