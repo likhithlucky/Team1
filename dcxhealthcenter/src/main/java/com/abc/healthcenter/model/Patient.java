@@ -29,10 +29,10 @@ public class Patient{
 	private String patientName;
 	
 	@NotEmpty(message = "Patient UserName is required")
-	private String patientuserName;
+	private String patientUserName;
 	
 	@NotEmpty(message = "Patient Password is required")
-	private String patientpassword;
+	private String patientPassword;
 	
 	@NotNull(message = "Patient Age is required")
 	private int patientAge;
@@ -61,34 +61,34 @@ public class Patient{
 
 	/**
 	 *  getter method for patient username
-	 * @return patientusername
+	 * @return patientUsername
 	 */
-	public String getPatientuserName() {
-		return patientuserName;
+	public String getPatientUserName() {
+		return patientUserName;
 	}
 	
 	/**
 	 *  setter method for patient username
-	 * @param patientuserName
+	 * @param patientUserName
 	 */
-	public void setPatientuserName(String patientuserName) {
-		this.patientuserName = patientuserName;
+	public void setPatientUserName(String patientUserName) {
+		this.patientUserName = patientUserName;
 	}
 	
 	/**
 	 *  getter method for patient password
-	 * @return patientpassword
+	 * @return patientPassword
 	 */
-	public String getPatientpassword() {
-		return patientpassword;
+	public String getPatientPassword() {
+		return patientPassword;
 	}
 	
 	/**
 	 * setter method for patient password
-	 * @param patientpassword
+	 * @param patientPassword
 	 */
-	public void setPatientpassword(String patientpassword) {
-		this.patientpassword = patientpassword;
+	public void setPatientPassword(String patientPassword) {
+		this.patientPassword = patientPassword;
 	}
 	
 	/**

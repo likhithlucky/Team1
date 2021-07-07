@@ -4,9 +4,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.abc.healthcenter.entity.PatientEntity;
+import com.abc.healthcenter.exception.InvalidCredentialsException;
 import com.abc.healthcenter.exception.ResourceAlreadyExistException;
 import com.abc.healthcenter.exception.ResourceNotFoundException;
 import com.abc.healthcenter.model.Patient;
+import com.abc.healthcenter.model.PatientLogin;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.abc.healthcenter.repository.PatientRepository;
@@ -126,8 +129,8 @@ public class PatientServiceImpl implements PatientService{
 			patientEntity.setPatientContact(patient.getPatientContact());
 			patientEntity.setPatientGender(patient.getPatientGender());
 			patientEntity.setPatientEmail(patient.getPatientEmail());
-			patientEntity.setPatientuserName(patient.getPatientuserName());
-			patientEntity.setPatientpassword(patient.getPatientpassword());
+			patientEntity.setPatientUserName(patient.getPatientUserName());
+			patientEntity.setPatientPassword(patient.getPatientPassword());
 			patientEntity.setPatientMessage(patient.getPatientMessage());
 			patientEntity.setAppointments(patient.getAppointments());
 			patientEntity.setPayments(patient.getPayments());
@@ -151,8 +154,8 @@ public class PatientServiceImpl implements PatientService{
 		patientEntity.setPatientContact(patient.getPatientContact());
 		patientEntity.setPatientGender(patient.getPatientGender());
 		patientEntity.setPatientEmail(patient.getPatientEmail());
-		patientEntity.setPatientuserName(patient.getPatientuserName());
-		patientEntity.setPatientpassword(patient.getPatientpassword());
+		patientEntity.setPatientUserName(patient.getPatientUserName());
+		patientEntity.setPatientPassword(patient.getPatientPassword());
 		patientEntity.setPatientMessage(patient.getPatientMessage());
 		patientEntity.setAppointments(patient.getAppointments());
 		patientEntity.setPayments(patient.getPayments());
@@ -175,13 +178,30 @@ public class PatientServiceImpl implements PatientService{
 		patient.setPatientContact(patientEntity.get().getPatientContact());
 		patient.setPatientGender(patientEntity.get().getPatientGender());
 		patient.setPatientEmail(patientEntity.get().getPatientEmail());
-		patient.setPatientuserName(patientEntity.get().getPatientuserName());
-		patient.setPatientpassword(patientEntity.get().getPatientpassword());
+		patient.setPatientUserName(patientEntity.get().getPatientUserName());
+		patient.setPatientPassword(patientEntity.get().getPatientPassword());
 		patient.setPatientMessage(patientEntity.get().getPatientMessage());
 		patient.setAppointments(patientEntity.get().getAppointments());
 		patient.setPayments(patientEntity.get().getPayments());
 		return patient;
 	}
-	
+	@Override
+	public boolean checkPatientCredentials(PatientLogin patientlogin) throws InvalidCredentialsException {
+		Optional<PatientEntity> patient = patientRepository.findByPatientUserName(patientlogin.getPatientUserName());
+		
+		if(patient.isEmpty()) {
+			
+			throw new InvalidCredentialsException("No data found with that username");
+		}
+		else {
+			if(patientlogin.getPatientPassword().equals(patient.get().getPatientPassword())) {
+				boolean check = true;
+				return check;
+			}
+			else {
+				throw new InvalidCredentialsException("Please enter correct password");
+			}
+		}
 
+}
 }

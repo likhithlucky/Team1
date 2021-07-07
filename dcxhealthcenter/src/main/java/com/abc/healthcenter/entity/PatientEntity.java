@@ -29,10 +29,10 @@ public class PatientEntity {
 	private String patientName;
 	
 	@Column(name="user_name")
-	private String patientuserName;
+	private String patientUserName;
 	
 	@Column(name="password")
-	private String patientpassword;
+	private String patientPassword;
 	
 	@Column(name = "patient_age")
 	private int patientAge;
@@ -61,32 +61,32 @@ public class PatientEntity {
 
 	/**
 	 * getter method for patient username
-	 * @return patientuserName
+	 * @return patientUserName
 	 */
-	public String getPatientuserName() {
-		return patientuserName;
+	public String getPatientUserName() {
+		return patientUserName;
 	}
 	/**
 	 * setter method for patient username
-	 * @param patientuserName
+	 * @param patientUserName
 	 */
-	public void setPatientuserName(String patientuserName) {
-		this.patientuserName = patientuserName;
+	public void setPatientUserName(String patientUserName) {
+		this.patientUserName = patientUserName;
 	}
 	
 	/**
 	 * getter method for patient password
-	 * @return patientpassword
+	 * @return patientPassword
 	 */
-	public String getPatientpassword() {
-		return patientpassword;
+	public String getPatientPassword() {
+		return patientPassword;
 	}
 	/**
 	 * setter method for patient password
-	 * @param patientpassword
+	 * @param patientPassword
 	 */
-	public void setPatientpassword(String patientpassword) {
-		this.patientpassword = patientpassword;
+	public void setPatientPassword(String patientPassword) {
+		this.patientPassword = patientPassword;
 	}
 	
 	/**

@@ -1,7 +1,6 @@
 package com.abc.healthcenter.entity;
 
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,8 +32,8 @@ public class AdminEntity {
 	@Column(name="password")
 	private String password;
 	
-	@OneToMany(mappedBy="admin",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	private List<NewsEntity> news;
+	
+	//private List<NewsEntity> news;
 	
 	/**
 	 * getter for admin id

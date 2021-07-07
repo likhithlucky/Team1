@@ -17,4 +17,5 @@ import com.abc.healthcenter.entity.PatientEntity;
 	public interface PatientRepository extends JpaRepository<PatientEntity,Integer>{
 		
 		public Optional<PatientEntity> findByPatientName(String PatientName);
+		public Optional<PatientEntity> findByPatientUserName(String PatientUserName);
 	}
