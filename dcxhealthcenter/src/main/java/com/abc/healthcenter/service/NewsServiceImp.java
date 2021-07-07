@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 
 
 import com.abc.healthcenter.entity.NewsEntity;
-import com.abc.healthcenter.exceptions.ResourceAlreadyExistException;
-import com.abc.healthcenter.exceptions.ResourceNotFoundException;
+import com.abc.healthcenter.exception.ResourceAlreadyExistException;
+import com.abc.healthcenter.exception.ResourceNotFoundException;
 import com.abc.healthcenter.model.News;
 
 import com.abc.healthcenter.repository.NewsRepository;

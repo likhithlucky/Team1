@@ -1,40 +1,5 @@
 package com.abc.healthcenter.model;
 
-<<<<<<< HEAD
-public class Admin {
-	
-	private int adminId;
-	
-	private String userName;
-	
-	private String password;
-
-	public int getAdminId() {
-		return adminId;
-	}
-
-	public void setAdminId(int adminId) {
-		this.adminId = adminId;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-}
-=======
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -101,4 +66,4 @@ public class Admin {
 	}
 	
 }
->>>>>>> branch 'master' of https://github.com/likhithlucky/Team1.git
+

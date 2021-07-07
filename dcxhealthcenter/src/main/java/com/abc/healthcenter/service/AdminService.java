@@ -1,7 +1,8 @@
 package com.abc.healthcenter.service;
 
-import com.abc.healthcenter.exceptions.ResourceAlreadyExistException;
-import com.abc.healthcenter.exceptions.ResourceNotFoundException;
+
+import com.abc.healthcenter.exception.ResourceAlreadyExistException;
+import com.abc.healthcenter.exception.ResourceNotFoundException;
 import com.abc.healthcenter.model.Admin;
 
 

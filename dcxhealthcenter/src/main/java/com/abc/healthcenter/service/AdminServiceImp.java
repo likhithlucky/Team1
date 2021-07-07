@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.abc.healthcenter.entity.AdminEntity;
-import com.abc.healthcenter.exceptions.ResourceAlreadyExistException;
-import com.abc.healthcenter.exceptions.ResourceNotFoundException;
+import com.abc.healthcenter.exception.ResourceAlreadyExistException;
+import com.abc.healthcenter.exception.ResourceNotFoundException;
 import com.abc.healthcenter.model.Admin;
 import com.abc.healthcenter.repository.AdminRepository;
 
