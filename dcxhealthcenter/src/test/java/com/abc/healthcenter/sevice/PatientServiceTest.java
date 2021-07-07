@@ -90,7 +90,7 @@ public class PatientServiceTest {
 	         when(patientRepository.findByPatientName("raksha")).thenThrow(ResourceNotFoundException.class);
 	        
 	         assertThrows(ResourceNotFoundException.class,()->patientServiceImpl.findPatientbyName("raksha"));
-	     }
+	     }// checking
 		 
 		
 }
