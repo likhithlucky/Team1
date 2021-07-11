@@ -18,36 +18,39 @@ import com.abc.healthcenter.repository.DoctorRepository;
 
 /**
  * 
- * @author NAGA SRI HARSHA
+ * @author Lahari Voruganti
  *date : 05-July-2021
  */
 @Service
-public class DoctorServiceImp implements DoctorService{
+public class DoctorServiceImpl implements DoctorService{
 	
 	@Autowired
 	private DoctorRepository doctorRepository;
-	private static final Logger LOGGER = LoggerFactory.getLogger(DoctorServiceImp.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(DoctorServiceImpl.class);
 	
 	/**
 	 * implements saveDoctor from DoctorService interface
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void saveDoctor(Doctor doctor) throws ResourceAlreadyExistException {
+	public Doctor saveDoctor(Doctor doctor) throws ResourceAlreadyExistException {
 		LOGGER.info("doctorRepository::findByDoctorUserName(int id)method called");
 		Optional<DoctorEntity> doctorEntity1 = doctorRepository.findByDoctorUserName(doctor.getDoctorUserName());
 		LOGGER.info("Optional<Doctor> object saved");
 		if(doctorEntity1.isPresent()) {
-			LOGGER.error("ResourceAlreadyExistException encountered with id"+doctor.getDoctorId());
-			throw new ResourceAlreadyExistException("Doctor already exists with this ID"+doctor.getDoctorId());
+			LOGGER.error("ResourceAlreadyExistException encountered with id"+doctor.getDoctorUserName());
+			throw new ResourceAlreadyExistException("Doctor already exists with this ID"+doctor.getDoctorUserName());
 		}
 		else {
 			DoctorEntity doctorEntity = convertModeltoEntity(doctor);
-			doctorRepository.save(doctorEntity);
 			LOGGER.info("doctor details saved in repository");
+			DoctorEntity returnedDoctorEntity =doctorRepository.save(doctorEntity);
+			LOGGER.info("Exiting from DoctorServiceImp::saveDoctor(Doctor doctor)method");
+			return convertDoctorEntitytoDoctorModel(returnedDoctorEntity);	
 			
 		}
-		LOGGER.info("Exiting from DoctorServiceImp::saveDoctor(Doctor doctor)method");
+		
+		
 	}
 	
 	/**
@@ -223,5 +226,25 @@ public class DoctorServiceImp implements DoctorService{
 		doctor.setDoctorPassword(doctorEntity.get().getDoctorPassword());
 		return doctor;
 	}
-}
 	
+	/**
+	 * converts doctorEntity into model
+	 * @param doctorEntity
+	 * @return
+	 */
+	private Doctor convertDoctorEntitytoDoctorModel(DoctorEntity doctorEntity) {
+		Doctor doctor = new Doctor();
+		doctor.setDoctorId(doctorEntity.getDoctorId());
+		doctor.setDoctorName(doctorEntity.getDoctorName());
+		doctor.setDoctorEmail(doctorEntity.getDoctorEmail());
+		doctor.setDoctorContact(doctorEntity.getDoctorContact());
+		doctor.setDoctorDepartment(doctorEntity.getDoctorDepartment());
+		doctor.setDoctorExperience(doctorEntity.getDoctorExperience());
+		doctor.setDoctorGender(doctorEntity.getDoctorGender());
+		doctor.setDoctorQualification(doctorEntity.getDoctorQualification());
+		doctor.setDoctorAddress(doctorEntity.getDoctorAddress());
+		doctor.setDoctorUserName(doctorEntity.getDoctorUserName());
+		doctor.setDoctorPassword(doctorEntity.getDoctorPassword());
+		return doctor;
+	}
+}

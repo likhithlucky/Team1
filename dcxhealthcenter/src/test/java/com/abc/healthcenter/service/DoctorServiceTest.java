@@ -1,9 +1,10 @@
-
 package com.abc.healthcenter.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -21,7 +22,7 @@ import com.abc.healthcenter.model.Doctor;
 import com.abc.healthcenter.repository.DoctorRepository;
 
 /**
- * @author NAGA SRI HARSHA
+ * @author LAHARI
  *date : 06-July-2021
  */
 @SpringBootTest
@@ -30,7 +31,7 @@ public class DoctorServiceTest {
 	private DoctorRepository doctorRepository;
 	
 	@InjectMocks
-	private DoctorServiceImp doctorServiceImp;
+	private DoctorServiceImpl doctorServiceImpl;
 	
 	@Test
 	public void testFindbyDoctorId() {
@@ -48,7 +49,7 @@ public class DoctorServiceTest {
 		doctor.setDoctorPassword("ASH");
 		Optional<DoctorEntity> optionalDoctor = Optional .of(doctor);
 		when(doctorRepository.findById(101)).thenReturn(optionalDoctor);
-		Doctor doctorModel = doctorServiceImp.findDoctorbyId(101);
+		Doctor doctorModel = doctorServiceImpl.findDoctorbyId(101);
 		assertNotNull(doctorModel);
 		assertEquals(doctor.getDoctorName(),doctorModel.getDoctorName());
 		assertEquals(doctor.getDoctorContact(),doctorModel.getDoctorContact());
@@ -92,7 +93,7 @@ public class DoctorServiceTest {
 	@Test
 	public void testFindbyDoctorIdThrowingException(){
 		when(doctorRepository.findById(144)).thenThrow(ResourceNotFoundException.class);
-		assertThrows(ResourceNotFoundException.class,()->doctorServiceImp.findDoctorbyId(144));
+		assertThrows(ResourceNotFoundException.class,()->doctorServiceImpl.findDoctorbyId(144));
 	}
 	
 	@Test
@@ -111,7 +112,7 @@ public class DoctorServiceTest {
 		doctor.setDoctorPassword("ASH");
 		Optional<DoctorEntity> doctorEntity = Optional.of(doctor);
 		when(doctorRepository.findByDoctorName("ash")).thenReturn(doctorEntity);
-		Doctor doctorModel = doctorServiceImp.findDoctorbyName("ash");
+		Doctor doctorModel = doctorServiceImpl.findDoctorbyName("ash");
 		assertEquals(doctorModel.getDoctorContact(),doctor.getDoctorContact());
 		assertEquals(doctorModel.getDoctorDepartment(),doctor.getDoctorDepartment());
 		assertEquals(doctorModel.getDoctorEmail(),doctor.getDoctorEmail());
@@ -119,6 +120,38 @@ public class DoctorServiceTest {
 	@Test
 	public void testFindbyDoctorNameThrowingException(){
 		when(doctorRepository.findByDoctorName("harsha")).thenThrow(ResourceNotFoundException.class);
-		assertThrows(ResourceNotFoundException.class,()->doctorServiceImp.findDoctorbyName("harsha"));
+		assertThrows(ResourceNotFoundException.class,()->doctorServiceImpl.findDoctorbyName("harsha"));
 	}
+	
+	 @Test
+	 public void testDeleteDoctorById() {
+		 DoctorEntity doctorEntity = new DoctorEntity();
+		 	doctorEntity.setDoctorId(101);
+			doctorEntity.setDoctorName("ash");
+			doctorEntity.setDoctorEmail("ash@gmail.com");
+			doctorEntity.setDoctorContact(68479483723L);
+			doctorEntity.setDoctorDepartment("general");
+			doctorEntity.setDoctorExperience(3);
+			doctorEntity.setDoctorGender("MALE");
+			doctorEntity.setDoctorQualification("M.S,M.D");
+			doctorEntity.setDoctorAddress("OSMANIA CAFE,Tadepalligudem");
+			doctorEntity.setDoctorUserName("ASH");
+			doctorEntity.setDoctorPassword("ASH");
+			Optional<DoctorEntity> optionalEntity = Optional.of(doctorEntity);
+			doNothing().when(doctorRepository).deleteById(1111);
+			when(doctorRepository.findById(doctorEntity.getDoctorId())).thenReturn(optionalEntity);
+			
+			doctorServiceImpl.deleteDoctorbyId(101);
+			verify(doctorRepository).deleteById(101);
+	 
+	 }	
+	 
+
+	 @Test
+     public void testDeleteDoctorByIdThrowingException() {
+        
+         when(doctorRepository.findById(500)).thenThrow(ResourceNotFoundException.class);
+        
+         assertThrows(ResourceNotFoundException.class,()->doctorServiceImpl.deleteDoctorbyId(144));
+     }
 }

@@ -4,6 +4,8 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,10 +20,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name ="payment_tbl")
+
 public class PaymentEntity {
 	
 	@Id
 	@Column(name="payment_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int paymentId;
 	
 	@Column(name="payment_date")

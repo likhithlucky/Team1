@@ -120,19 +120,20 @@ public class News {
 		this.newsContact = newsContact;
 	}
 	/**
-	 * getter for newsdate
+	 * getter for news date
 	 * @return
 	 */
 	public LocalDate getNewsDate() {
 		return newsDate;
 	}
 	/**
-	 * setter for newsdate
+	 * setter for news date
 	 * @param newsDate
 	 */
 	public void setNewsDate(LocalDate newsDate) {
 		this.newsDate = newsDate;
 	}
+	
 
 	
 

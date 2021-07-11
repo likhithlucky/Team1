@@ -1,10 +1,13 @@
 package com.abc.healthcenter.model;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 /**
- * @author NAGA SRI HARSHA
+ * @author LAHARI
  *date : 05-July-2021
  */
 public class Doctor {
@@ -12,34 +15,44 @@ public class Doctor {
 	private int doctorId;
 
 	@NotEmpty(message="please provide doctorname")
+	@Positive(message = "please provide valid name")
 	private String doctorName;
 	
 	@NotEmpty(message="please provide username")
+	@Positive(message = "please provide valid UserName")
 	private String doctorUserName;
 	
 	@NotEmpty(message="please provide password")
+	@Positive(message = "please provide valid Password")
 	private String doctorPassword;
 
 	@NotEmpty(message="please provide email")
 	@Email(message="email should be valid")
 	private  String doctorEmail;
 
+	@Min(value = 10, message = "please enter 10 digits")
+    @Max(value = 10, message = "only 10 digits Phone number will be accepted")
 	@NotNull(message="please provide contact")
 	private long doctorContact;
 
 	@NotEmpty(message="please provide gender")
+	@Positive(message = "please provide valid ")
 	private String doctorGender;
 
 	@NotNull(message="please provide experience")
+	@Positive(message = "please provide valid Experience")
 	private int doctorExperience;
 
 	@NotEmpty(message="please provide department")
+	@Positive(message = "please provide valid Department")
 	private String doctorDepartment;
 
 	@NotEmpty(message="please provide qualification")
+	@Positive(message = "please provide valid Qualification")
 	private String doctorQualification;
 	
 	@NotEmpty(message="please provide address")
+	@Positive(message = "please provide valid Address")
 	private String doctorAddress;
 
 	/**

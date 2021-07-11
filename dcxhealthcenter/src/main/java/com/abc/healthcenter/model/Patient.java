@@ -4,9 +4,12 @@ package com.abc.healthcenter.model;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 
 import com.abc.healthcenter.entity.AppointmentEntity;
 import com.abc.healthcenter.entity.PaymentEntity;
@@ -42,7 +45,9 @@ public class Patient{
 	@NotEmpty(message = "Patient Email is required")
 	private String patientEmail;
 	
+	
 	@NotNull(message = "Patient Contact is required")
+	@Positive(message = "please provide valid phone number")
 	private long patientContact;
 	
 	@NotEmpty(message = "Patient Message is required")

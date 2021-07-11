@@ -18,7 +18,7 @@ public interface DoctorService {
   * @param doctor
   * @throws ResourceAlreadyExistException
   */
- public void saveDoctor(Doctor doctor) throws ResourceAlreadyExistException;
+ public Doctor saveDoctor(Doctor doctor) throws ResourceAlreadyExistException;
  /**
   * 
   * @param DoctorId

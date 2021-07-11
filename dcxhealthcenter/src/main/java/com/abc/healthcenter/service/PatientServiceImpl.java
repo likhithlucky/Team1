@@ -33,7 +33,7 @@ public class PatientServiceImpl implements PatientService{
 	 */
 
 	@Override
-	public void savePatient(Patient patient) throws ResourceAlreadyExistException {
+	public Patient savePatient(Patient patient) throws ResourceAlreadyExistException {
 		LOGGER.info("patientRepository::findById(int id)method called");
 		 Optional<PatientEntity> optionalPatient = patientRepository.findByPatientUserName(patient.getPatientUserName());
 			
@@ -45,9 +45,11 @@ public class PatientServiceImpl implements PatientService{
 				
 				patientRepository.save(patientEntity);
 				LOGGER.info("patient details saved in repository");
-				
+				PatientEntity returnedPatientEntity =patientRepository.save(patientEntity);
+				LOGGER.info("Exiting from PatientServiceImpl::savePatient(Patient patient)method");
+				return convertPatientEntitytoPatientModel(returnedPatientEntity);	
 			}
-			LOGGER.info("Exiting from PatientServiceImpl::savePatient(Patient patient)method");
+			
 	}
 	
 	/**
@@ -108,6 +110,7 @@ public class PatientServiceImpl implements PatientService{
 			throw new ResourceNotFoundException("Cannot find patient with this Name "+name);
 		}
 	}
+	
 	/**
 	 * Implements update Patient from PatientService Interface
 	 *  {@inheritdoc}
@@ -141,6 +144,52 @@ public class PatientServiceImpl implements PatientService{
 		LOGGER.info("Exiting from PatientServiceImpl::updatePatient(Patient patient)method");
 	}
 	
+	/**
+	 * Implements login credentials for patient
+	 * {@inheritdoc}
+	 */
+	@Override
+	public boolean checkPatientCredentials(PatientLogin patientlogin) throws InvalidCredentialsException {
+		Optional<PatientEntity> patient = patientRepository.findByPatientUserName(patientlogin.getPatientUserName());
+		
+		if(patient.isEmpty()) {
+			
+			throw new InvalidCredentialsException("No data found with that username");
+		}
+		else {
+			if(patientlogin.getPatientPassword().equals(patient.get().getPatientPassword())) {
+				boolean check = true;
+				return check;
+			}
+			else {
+				throw new InvalidCredentialsException("Please enter correct password");
+			}
+		}
+	}
+	
+	
+    /**
+    * Implements forget password for patient
+    *  {@inheritdoc}
+    */
+@Override
+
+	public void forgetPasword(PatientForgetPassword patientcredentials) throws InvalidCredentialsException {
+		boolean check =  patientRepository.existsByPatientUserName( patientcredentials.getPatientUserName());
+		if(check) {
+			PatientEntity  patient = patientRepository.findByPatientUserName( patientcredentials.getPatientUserName()).get();
+			if( patient.getPatientEmail().equals( patientcredentials.getPatientEmail())) {
+				 patient.setPatientPassword( patientcredentials.getNewPassword());
+				 patientRepository.save( patient);
+			}
+			else {
+				throw new InvalidCredentialsException("Email Id not matched");
+			}
+		}
+		else {
+			throw new InvalidCredentialsException("The username is not found in our data base");
+		}
+	}
 	/**
 	 * This method converts model into entity
 	 * @param patient
@@ -187,50 +236,23 @@ public class PatientServiceImpl implements PatientService{
 		return patient;
 	}
 	
-	/**
-	 * Implements login credentials for patient
-	 * {@inheritdoc}
-	 */
-	@Override
-	public boolean checkPatientCredentials(PatientLogin patientlogin) throws InvalidCredentialsException {
-		Optional<PatientEntity> patient = patientRepository.findByPatientUserName(patientlogin.getPatientUserName());
-		
-		if(patient.isEmpty()) {
-			
-			throw new InvalidCredentialsException("No data found with that username");
-		}
-		else {
-			if(patientlogin.getPatientPassword().equals(patient.get().getPatientPassword())) {
-				boolean check = true;
-				return check;
-			}
-			else {
-				throw new InvalidCredentialsException("Please enter correct password");
-			}
-		}
+	private Patient convertPatientEntitytoPatientModel(PatientEntity patientEntity) {
+		Patient patient = new Patient();
+		patient.setPatientId(patientEntity.getPatientId());
+		patient.setPatientName(patientEntity.getPatientName());
+		patient.setPatientAddress(patientEntity.getPatientAddress());
+		patient.setPatientAge(patientEntity.getPatientAge());
+		patient.setPatientContact(patientEntity.getPatientContact());
+		patient.setPatientGender(patientEntity.getPatientGender());
+		patient.setPatientEmail(patientEntity.getPatientEmail());
+		patient.setPatientUserName(patientEntity.getPatientUserName());
+		patient.setPatientPassword(patientEntity.getPatientPassword());
+		patient.setPatientMessage(patientEntity.getPatientMessage());
+		patient.setAppointments(patientEntity.getAppointments());
+		patient.setPayments(patientEntity.getPayments());
+		return patient;
 	}
-
-		
-	/**
-	 * Implements forget password for patient
-	 *  {@inheritdoc}
-	 */
-	@Override
 	
-		public void forgetPasword(PatientForgetPassword patientcredentials) throws InvalidCredentialsException {
-			boolean check =  patientRepository.existsByPatientUserName( patientcredentials.getPatientUserName());
-			if(check) {
-				PatientEntity  patient = patientRepository.findByPatientUserName( patientcredentials.getPatientUserName()).get();
-				if( patient.getPatientEmail().equals( patientcredentials.getPatientEmail())) {
-					 patient.setPatientPassword( patientcredentials.getNewPassword());
-					 patientRepository.save( patient);
-				}
-				else {
-					throw new InvalidCredentialsException("Email Id not matched");
-				}
-			}
-			else {
-				throw new InvalidCredentialsException("The username is not found in our data base");
-			}
-		}
+
+
 }

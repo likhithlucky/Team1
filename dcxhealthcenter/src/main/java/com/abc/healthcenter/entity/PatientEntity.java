@@ -24,7 +24,7 @@ import javax.persistence.Table;
 @Table (name = "patient_tbl")
 public class PatientEntity {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name ="patient_Id")
 	private int patientId ;
 	

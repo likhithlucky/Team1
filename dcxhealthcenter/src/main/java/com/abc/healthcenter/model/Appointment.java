@@ -19,8 +19,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  */
 public class Appointment {
 	
-	@NotNull(message = "please provide id")
-	@Positive(message = "please provide valid appointmentId")
+	
+	
 	private int appointmentId;
 	 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")

@@ -65,8 +65,8 @@ public class AppointmentServiceImpl implements AppointmentService {
 			while(i.hasNext()) {
 				AppointmentEntity duplicateappointmentEntity = i.next();
 				if(duplicateappointmentEntity.getDoctor().getDoctorId() == (appointment.getDoctorId())) {
-					LOGGER.error("ResourceAlreadyExistException encountered with id"+appointment.getAppointmentId());
-					throw new ResourceAlreadyExistException("Doctor isn't available for this slot : "+appointment.getAppointmentId());
+					LOGGER.error("ResourceAlreadyExistException encountered with id"+appointment.getAppointmentSlot());
+					throw new ResourceAlreadyExistException("Doctor isn't available for this slot : "+appointment.getAppointmentSlot());
 				}
 			}
 			LOGGER.info("Appointment details saved in repository");

@@ -1,7 +1,5 @@
 package com.abc.healthcenter.controller;
 
-import java.time.LocalDate;
-
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 
@@ -59,7 +57,8 @@ public class NewsController {
 		
 		
 		News newsModel = newsService.saveNews(news);
-		
+		response.setMsg("News "+news.getNewsHeader()+",Has been Added.");
+		response.setStatus(HttpStatus.CREATED.value());
 		return new ResponseEntity<>(newsModel,HttpStatus.CREATED);
 	}
 	
@@ -120,4 +119,8 @@ public class NewsController {
 		News news = newsService.findNewsbyHeader(header);
 		return new ResponseEntity<>(news,HttpStatus.FOUND);
 	}
+	
+	
+	
+	
 }

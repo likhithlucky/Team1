@@ -21,7 +21,7 @@ public interface PatientService {
 	 * @throws ResourceAlreadyExistingException
 	 */
 	
-	 public void savePatient(Patient patient) throws ResourceAlreadyExistException;
+	 public Patient savePatient(Patient patient) throws ResourceAlreadyExistException;
 	 /**
 	  * Method to find Patient Details by using ID
 	  * @param id

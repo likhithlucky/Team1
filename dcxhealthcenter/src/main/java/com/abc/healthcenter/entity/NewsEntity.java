@@ -1,5 +1,7 @@
 package com.abc.healthcenter.entity;
 
+import java.time.LocalDate;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,6 +37,9 @@ public class NewsEntity {
 	
 	@Column(name="contact")
 	private String newsContact;
+	
+	@Column(name="date")
+	private LocalDate newsDate;
 	
 	@Column(name="adminId")
 	private int adminId;
@@ -109,5 +114,18 @@ public class NewsEntity {
 	public void setNewsContact(String newsContact) {
 		this.newsContact = newsContact;
 	}
-   
+    /**
+     * getter for news date
+     * @return
+     */
+	public LocalDate getNewsDate() {
+		return newsDate;
+	}
+    /**
+     * setter for news date
+     * @param newsDate
+     */
+	public void setNewsDate(LocalDate newsDate) {
+		this.newsDate = newsDate;
+	}
 }

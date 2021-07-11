@@ -15,6 +15,7 @@ import com.abc.healthcenter.entity.AppointmentFeedbackEntity;
 import com.abc.healthcenter.exception.ResourceAlreadyExistException;
 import com.abc.healthcenter.exception.ResourceNotAvailableException;
 import com.abc.healthcenter.exception.ResourceNotFoundException;
+import com.abc.healthcenter.exception.UnauthorisedAttemptException;
 import com.abc.healthcenter.model.AppointmentFeedback;
 import com.abc.healthcenter.repository.AppointmentFeedbackRepository;
 import com.abc.healthcenter.repository.AppointmentRepository;
@@ -38,17 +39,19 @@ private static final Logger LOGGER = LoggerFactory.getLogger(AppointmentFeedback
 	 * {@inheritDoc}
 	 */
 	@Override
-	public AppointmentFeedback saveFeedback(AppointmentFeedback feedback) {
+	public AppointmentFeedback saveFeedback(AppointmentFeedback feedback) throws UnauthorisedAttemptException,ResourceNotFoundException,ResourceAlreadyExistException {
 		LOGGER.info("AppointmentRepository::findById method called");
 		Optional<AppointmentEntity> optionalAppointment = appointmentRepository.findById(feedback.getAppointmentId());
 		if(optionalAppointment.isPresent()) {
 			AppointmentEntity appointmentEntity = convertOptionalAppointmentEntityToAppointmentEntity(optionalAppointment);
 			LOGGER.info("AppointmentFeedbackRepository::ExistsbyId method called");
-			if(appointmentFeedbackRepository.existsByAppointment(appointmentEntity)) {
-				LOGGER.error("ResourceAlreadyExistException encountered");
-				throw new ResourceAlreadyExistException("Feed back already submitted");
-			}
-			else {
+			
+			if(feedback.getPatientId() == appointmentEntity.getPatient().getPatientId() ) {
+				if(appointmentFeedbackRepository.existsByAppointment(appointmentEntity)) {
+					LOGGER.error("ResourceAlreadyExistException encountered");
+					throw new ResourceAlreadyExistException("Feed back already submitted");
+				}
+				else {
 				AppointmentFeedbackEntity feedbackEntity = new AppointmentFeedbackEntity();
 				feedbackEntity.setFeedback(feedback.getFeedback());
 				feedbackEntity.setRating(feedback.getRating());
@@ -59,6 +62,11 @@ private static final Logger LOGGER = LoggerFactory.getLogger(AppointmentFeedback
 				return convertFeedbackEntityToFeedback(returnedFeedback);
 					}
 				}
+			else {
+				LOGGER.error("UnauthorisedAttemptException encountered with patientId"+feedback.getPatientId());
+				throw new UnauthorisedAttemptException("This appointment doesn't belongs to this patient"+feedback.getPatientId());
+			}
+		}
 		else {
 			LOGGER.error("ResourceNotFoundException encountered with appointmentId"+feedback.getAppointmentId());
 			throw new ResourceNotFoundException("No appoinment exists with this id"+feedback.getAppointmentId());

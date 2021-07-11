@@ -44,7 +44,7 @@ public class PaymentController {
 	 * @return
 	 */
 	@PostMapping("/make")
-	public ResponseEntity<?> makePayment(@Valid @RequestBody Payment payment){
+	public ResponseEntity<Object> makePayment(@Valid @RequestBody Payment payment){
 		LOGGER.info("PaymentServiceImpl::makePayment(Payment payment) method called");
 		paymentService.makePayment(payment);
 		response.setMsg("Hello " + "" + ", Your payment is successful. We have recived the sum from you. You can check your payment details in your appointment ");
@@ -58,7 +58,7 @@ public class PaymentController {
 	 * @return
 	 */
 	@PostMapping("/find/{id}")
-	public ResponseEntity<?> getPaymentDetails(@Valid @Min(1) @PathVariable int id){
+	public ResponseEntity<Object> getPaymentDetails(@Valid @Min(1) @PathVariable int id){
 		LOGGER.info("PaymentServiceImpl::getPaymentDetailsbyID(int id) method called");
 		Payment payment = paymentService.getPaymentDetailsbyID(id);
 		return new ResponseEntity<>(payment ,HttpStatus.FOUND);
@@ -70,7 +70,7 @@ public class PaymentController {
 	 * @return
 	 */
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<?> deletePayment(@Valid @Min(1) @PathVariable int id){
+	public ResponseEntity<Object> deletePayment(@Valid @Min(1) @PathVariable int id){
 		LOGGER.info("PaymentServiceImpl::deletePaymentbyId(int id) method called");
 		paymentService.deletePaymentbyId(id);
 		response.setMsg("Hello "+ "" + ", your request for refund is processed. the status will be reflected in your appointment");

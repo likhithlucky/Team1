@@ -101,6 +101,7 @@ public class AdminServiceImpl implements AdminService {
 			LOGGER.info("Admin Details are updated");
 		}
 		LOGGER.info("Exiting from AdminServiceImp::updateAdminbyId(Admin admin)method ");
+		
 	}
 	
 	

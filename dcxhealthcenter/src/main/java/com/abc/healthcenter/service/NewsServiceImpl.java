@@ -102,7 +102,7 @@ public class NewsServiceImpl implements NewsService {
 		else {
 			newsEntity.setNewsId(news.getNewsId());
 			newsEntity.setNewsHeader(news.getNewsHeader());
-			newsEntity.setNewsBody(news.getNewsBody());;
+			newsEntity.setNewsBody(news.getNewsBody());
 			newsEntity.setNewsContact(news.getNewsContact());
 			newsRepository.save(newsEntity);
 			LOGGER.info("News Details are updated");
@@ -168,6 +168,7 @@ public class NewsServiceImpl implements NewsService {
 		newsEntity.setNewsBody(news.getNewsBody());
 		newsEntity.setNewsContact(news.getNewsContact());
 		newsEntity.setAdminId(news.getAdminId());
+		newsEntity.setNewsDate(news.getNewsDate());
 	
 		return newsEntity;
 	}
@@ -185,6 +186,7 @@ public class NewsServiceImpl implements NewsService {
 		news.setNewsHeader(newsEntity.get().getNewsHeader());
 		news.setNewsBody(newsEntity.get().getNewsBody());
 		news.setNewsContact(newsEntity.get().getNewsContact());
+		news.setNewsDate(newsEntity.get().getNewsDate());
 		
 		
 		return news;	
@@ -196,6 +198,7 @@ public class NewsServiceImpl implements NewsService {
 		news.setNewsHeader(newsEntity.getNewsHeader());
 		news.setNewsBody(newsEntity.getNewsBody());
 		news.setNewsContact(newsEntity.getNewsContact());
+		news.setNewsDate(newsEntity.getNewsDate());
 		return news;
 }
 }

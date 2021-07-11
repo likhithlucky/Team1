@@ -6,6 +6,7 @@ package com.abc.healthcenter.service;
 import com.abc.healthcenter.exception.ResourceAlreadyExistException;
 import com.abc.healthcenter.exception.ResourceNotAvailableException;
 import com.abc.healthcenter.exception.ResourceNotFoundException;
+import com.abc.healthcenter.exception.UnauthorisedAttemptException;
 import com.abc.healthcenter.model.AppointmentFeedback;
 
 /**
@@ -17,14 +18,19 @@ public interface AppointmentFeedbackService {
 	/**
 	 * method to save feedback for an appointment
 	 * @param feedback
-	 * @return
+	 * @return saved AppointmentFeedback
+	 * @throws UnauthorisedAttemptException
+	 * @throws ResourceNotFoundException
+	 * @throws ResourceAlreadyExistException
 	 */
-	public AppointmentFeedback saveFeedback(AppointmentFeedback feedback) throws ResourceAlreadyExistException,ResourceNotFoundException;
+	public AppointmentFeedback saveFeedback(AppointmentFeedback feedback) throws UnauthorisedAttemptException,ResourceNotFoundException,ResourceAlreadyExistException;
 	
 	/**
 	 * method to view feedback of an appointment
-	 * @param AppointmentId
-	 * @return
+	 * @param appointmentId
+	 * @return appointment feedback with the given appointmentId
+	 * @throws ResourceNotFoundException
+	 * @throws ResourceNotAvailableException
 	 */
 	public AppointmentFeedback viewFeedback(int appointmentId) throws ResourceNotFoundException,ResourceNotAvailableException;
 }
