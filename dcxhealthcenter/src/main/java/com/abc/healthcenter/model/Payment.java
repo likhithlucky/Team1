@@ -97,4 +97,3 @@ public class Payment {
 		this.billId = billId;
 	}
 }
-	
